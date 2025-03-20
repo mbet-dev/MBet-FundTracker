@@ -172,7 +172,8 @@ function App({ supabase }) {
           <Paper elevation={3} style={{ padding: '30px' }}>
             <AppBar position="static" color="primary">
               <Toolbar>
-                <Typography variant="h6">MBet©-Fund Request Tracker</Typography>
+                <img src="/MBet-FRT.jpg" alt="MBet Logo" style={{ marginRight: '10px', height: '40px' }} />
+                <Typography variant="h6">MBet© Fund Requests Tracker</Typography>
               </Toolbar>
             </AppBar>
             <Routes>

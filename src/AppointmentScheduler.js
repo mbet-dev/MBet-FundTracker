@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 function AppointmentScheduler() {
   const navigate = useNavigate();
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
-  const [time, setTime] = useState('09:00');
+  const [time, setTime] = useState(new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' }));
   const [locationType, setLocationType] = useState('online');
   const [description, setDescription] = useState('');
 
