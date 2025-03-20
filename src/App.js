@@ -22,6 +22,7 @@ const theme = createTheme({
 });
 
 function App({ supabase }) {
+  const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState('');
@@ -34,6 +35,12 @@ function App({ supabase }) {
   const [isAdmin, setIsAdmin] = useState(false);
   const [currentBear, setCurrentBear] = useState('bear4.png');
   const [typingTimeout, setTypingTimeout] = useState(null);
+
+  const clearSession = () => {
+    setSession(null);
+    setIsLoggedIn(false);
+    setIsAdmin(false);
+  };
 
   useEffect(() => {
     const bearImages = ['bear4.png', 'bear3.png'];
@@ -72,12 +79,6 @@ function App({ supabase }) {
       setIsLoggedIn(!!session);
     });
 
-    return () => {
-      supabase.auth.signOut();
-    };
-  }, [supabase]);
-
-  useEffect(() => {
     return () => {
       supabase.auth.signOut();
     };
@@ -179,7 +180,7 @@ function App({ supabase }) {
             <Routes>
               <Route path="/" element={
                 isLoggedIn ? (
-                  <Home supabase={supabase} isAdmin={isAdmin} />
+                  <Home supabase={supabase} isAdmin={isAdmin} supabaseUrl={supabaseUrl} clearSession={clearSession} />
                 ) : (
                   <Grid container spacing={2} direction="column" alignItems="center">
                     <Grid item>
@@ -222,7 +223,7 @@ function App({ supabase }) {
                   </Grid>
                 )
               } />
-              <Route path="/home" element={<Home supabase={supabase} isAdmin={isAdmin} />} />
+              <Route path="/home" element={<Home supabase={supabase} isAdmin={isAdmin} supabaseUrl={supabaseUrl} clearSession={clearSession} />} />
               <Route path="/fund-request" element={<FundRequestForm supabase={supabase} />} />
               <Route path="/admin-approval" element={<AdminApproval supabase={supabase} />} />
               <Route path="/notifications" element={<Notifications supabase={supabase} />} />
