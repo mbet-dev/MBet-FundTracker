@@ -16,7 +16,7 @@ function AdminApproval({ supabase }) {
     try {
       const { data, error } = await supabase
         .from('fund_requests')
-        .select('id, subject, case_description, amount_required, urgency_level, importance_level, status')
+        .select('id, subject, case_description, amount_required, currency, urgency_level, importance_level, status')
         .eq('status', 'pending');
 
       if (error) {
@@ -143,11 +143,11 @@ function AdminApproval({ supabase }) {
             <Grid container alignItems="center" spacing={2}>
               <Grid item xs={12}>
                 <ListItemText
-                  primary={`${request.subject} - ${request.caseDescription}`}
-                  secondary={`Amount: $${request.amount_required} | Urgency: ${request.urgency_level} | Importance: ${request.importance_level} | Status: ${request.status}`}
+                  primary={<Typography variant="subtitle1" style={{ fontWeight: 'bold' }}>{request.subject}</Typography>}
+                  secondary={`Description: ${request.case_description} | Requested Amount: ${request.amount_required} | Currency: ${request.currency} | Urgency: ${request.urgency_level} | Importance: ${request.importance_level} | Status: ${request.status}`}
                 />
               </Grid>
-              <Grid item xs={12} sm={4}>
+              <Grid item xs={12} sm={8}>
                 <TextField
                   label="Remark"
                   multiline
@@ -186,7 +186,7 @@ function AdminApproval({ supabase }) {
           {snackbarMessage}
         </Alert>
       </Snackbar>
-      <Button variant="contained" onClick={() => window.location.href='/home'}>Back to Home</Button>
+      <Button variant="contained" onClick={() => window.location.href='/home'} >Back to Home</Button>
     </Box>
   );
 }

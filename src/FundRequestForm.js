@@ -47,7 +47,8 @@ function FundRequestForm({ supabase }) {
         setAmountRequired('');
         seturgency_level('');
         setimportance_level('');
-          setCurrency('USD');
+        setCurrency('USD');
+        setSubject('');
       }
     } catch (error) {
       // alert('Error submitting fund request.'); // replaced with snackbar
@@ -143,9 +144,9 @@ function FundRequestForm({ supabase }) {
         <Button variant="contained" type="submit">
           Submit Request
         </Button>
-        <Button variant="contained" onClick={() => window.location.href='/home'}>Back to Home</Button>
+        <Button variant="contained" onClick={() => window.location.href='/home'} >Back to Home</Button>
       </Box>
-      <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleSnackbarClose}>
+      <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleSnackbarClose} >
         <Alert onClose={handleSnackbarClose} severity="success" sx={{ width: '100%' }}>
           {snackbarMessage}
         </Alert>

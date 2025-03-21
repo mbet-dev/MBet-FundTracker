@@ -41,7 +41,7 @@ function Notifications({ supabase }) {
       <Typography variant="h4" component="h1" gutterBottom>
         Notifications
       </Typography>
-      <Button variant="contained" sx={{ mb: 2 }} onClick={() => navigate('/home')}>
+      <Button variant="contained" sx={{ mb: 2 }} onClick={() => navigate('/home')} >
         Back to Home
       </Button>
 
@@ -52,8 +52,8 @@ function Notifications({ supabase }) {
         {fundRequests.map((request) => (
           <ListItem key={request.id}>
             <ListItemText
-              primary={request.case_description}
-              secondary={`Status: ${request.status}`}
+              primary={<strong>{request.subject}</strong>}
+              secondary={`Description: ${request.case_description} | Status: ${request.status} | Currency: ${request.currency} | Requested Amount: ${request.amount_required} | Approved Amount: ${request.amount_approved === null ? "(Pending Status)" : request.amount_approved}`}
             />
           </ListItem>
         ))}
